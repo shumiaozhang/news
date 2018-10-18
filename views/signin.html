@@ -45,10 +45,10 @@
            e.preventDefault();
             // 获取传入的参数
             var formData = $(this).serialize();
-            console.log(formData)
+            // console.log(formData)
             // 发送ajax请求
            $.post('/signin', formData, function(data){
-               console.log(data);
+            //    console.log(data);
                if(data.code === 200){
                    window.location.href = '/';
                }else {

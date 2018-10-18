@@ -19,7 +19,7 @@ exports.handleSignin = (req, res) => {
                message: '服务器出错啦，呜呜呜'
            });
        }
-       console.log(data)
+    //    console.log(data[0])
        // 如果邮箱不存在
         if(!data[0]){
             return res.send({
@@ -34,6 +34,9 @@ exports.handleSignin = (req, res) => {
                 message: '密码错误 再想想!'
             });
         }
+        // 存储seesion 不是持久化存储
+        req.session.user = data[0];
+        // console.log(req.session.user)
         // 密码和邮箱都正确
         res.send({
             code: 200,
@@ -42,3 +45,13 @@ exports.handleSignin = (req, res) => {
    });
 }
 // 导出给 router
+// 用户退出
+exports.handleSignout = (req, res) => {
+    // 1. 清除session保存的用户信息
+    delete req.session.user;
+
+    // 2. 跳转到登录页
+    res.redirect('/signin');
+
+
+}
